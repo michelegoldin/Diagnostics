@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(tidyverse)\nlibrary(ggfortify)\n\nmy_cars_data <- read_csv(\"./data/my_data.csv\")\n\nglimpse(my_cars_data)\nsummary(my_cars_data)\nhead(my_cars_data)\n\nmod1 <- lm(mpg~wt, data =mtcars)\nsummary(mod1)\n\n\n#1 The regression model is linear in parameters\n#eyeball it\nmtcars %>%\nggplot(., aes(x=wt, y =mpg))+\n  geom_point() +\n  geom_smooth()\n\n#2. Check that the mean of residuals equals zero\n#check model summary and test manually\n\nsummary(mod1)\nmean(mod1$residuals)\n\n#3 Homoskedasticity of residuals or equal variance\n#left side plots\n\nautoplot(mod1, which = c(1,3))\n\n#4 No autocorrelation of residuals\n\nacf(mod1$residuals) # visual inspection\nlmtest::dwtest(mod1) #formal test: Durbin-Watson test\n\n#5 Noramlity of residuals\n\nautoplot(mod1)\n\n\nmy_df <- mtcars\n\nwrite_csv(x=my_df, path = \"./data/my_data.csv\")\n\n#for help go into console and type in args(write_csv) or ?(write_csv)\n\n\n",
+    "created" : 1519143916077.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1710824405",
+    "id" : "AEE08B3A",
+    "lastKnownWriteTime" : 1519145949,
+    "last_content_update" : 1519145949619,
+    "path" : "~/Desktop/Diagnostics/Scripts/my_script.R",
+    "project_path" : "Scripts/my_script.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
